@@ -1039,21 +1039,60 @@
         }
     </style>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#next"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Selanjutnya";
-        }
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        var form = $(".validation-wizard").show();
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#previous"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Sebelumnya";
-        }
+        $(".validation-wizard").steps({
+            headerTag: "h6",
+            bodyTag: "section",
+            transitionEffect: "fade",
+            titleTemplate: '<span class="step">#index#</span> #title#',
+            labels: {
+                next: "Selanjutnya",
+                previous: "Sebelumnya",
+                finish: "Simpan"
+            },
+            onInit: function (event, currentIndex) {
+                toggleButtons(currentIndex);
+            },
+            onStepChanged: function (event, currentIndex, priorIndex) {
+                toggleButtons(currentIndex);
+            }
         });
-    </script>
+
+        function toggleButtons(currentIndex) {
+            const nextBtn = $('.actions a[href="#next"]');
+            const prevBtn = $('.actions a[href="#previous"]');
+            const finishBtn = $('.actions a[href="#finish"]');
+
+            // Reset tombol
+            nextBtn.show();
+            prevBtn.show();
+            finishBtn.show();
+
+            // Step 0 (Langkah 1)
+            if (currentIndex === 0) {
+                prevBtn.hide();           // Gak boleh mundur
+                nextBtn.show();           // Ada tombol next
+                finishBtn.show();         // Ada tombol simpan
+            }
+
+            // Step 1 (Langkah 2)
+            if (currentIndex === 1) {
+                prevBtn.show();           // Bisa balik
+                nextBtn.show();           // Bisa lanjut
+                finishBtn.hide();         // Gak ada tombol simpan
+            }
+
+            // Step 2 (Langkah 3)
+            if (currentIndex === 2) {
+                prevBtn.show();           // Bisa balik
+                nextBtn.hide();           // Gak bisa lanjut (karena udah akhir)
+                finishBtn.show();         // Bisa simpan
+            }
+        }
+    });
+</script>
+
 @endsection
