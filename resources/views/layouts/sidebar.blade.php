@@ -91,34 +91,41 @@
             <ul class="first-level {{ request()->is('main/polikia') || request()->is('main/poliumum') || request()->is('main/rawat-inap') ? 'in' : '' }} collapse"
                 aria-expanded="false">
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('main/poliumum') ? 'active' : '' }}" href="/main/poliumum"
-                        aria-expanded="false">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Poli Umum</span>
-                    </a>
-                    {{-- <ul class="second-level collapse" aria-expanded="false">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link {{ request()->is('') ? 'active' : '' }}"
-                                href="/main/poliumum/antrian">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Antrian</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link {{ request()->is('') ? 'active' : '' }}"
-                                href="/main/poliumum/riwayat">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Riwayat</span>
-                            </a>
-                        </li>
-                    </ul> --}}
-                </li>
+    <a class="sidebar-link d-flex justify-content-between align-items-center {{ request()->is('main/poliumum') || request()->is('main/poliumum/*') ? 'active' : '' }}"
+       href="#"
+       data-bs-toggle="collapse"
+       aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}"
+       data-bs-target="#submenu-poliumum">
+        <div class="d-flex align-items-center">
+            <div class="round-16 d-flex align-items-center justify-content-center">
+                <i class="ti ti-circle"></i>
+            </div>
+            <span class="hide-menu ms-4">Poli Umum</span>
+        </div>
+        <i class="ti ti-chevron-down ms-auto"></i> {{-- ini panahnyaaa --}}
+    </a>
+
+    <ul id="submenu-poliumum"
+    class="second-level collapse {{ request()->is('main/poliumum/*') ? 'show' : '' }}"
+    aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}">
+    
+    <li class="sidebar-item">
+        <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
+            href="/main/poliumum/antrian">
+            <i class="ti ti-circle"></i>
+            <span class="hide-menu">Antrian</span>
+        </a>
+    </li>
+    <li class="sidebar-item">
+        <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
+            href="/main/poliumum/riwayat">
+            <i class="ti ti-circle"></i>
+            <span class="hide-menu">Riwayat</span>
+        </a>
+    </li>
+</ul>
+</li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('main/layanan', 'main/layanan/*') ? 'active' : '' }}"
                         href="/main/layanan">
