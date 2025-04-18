@@ -106,23 +106,24 @@
     </a>
 
     <ul id="submenu-poliumum"
-        class="second-level collapse {{ request()->is('main/poliumum/*') ? 'show' : '' }}"
-        aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}">
-        <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
-                href="/main/poliumum/antrian">
-                <i class="ti ti-circle"></i>
-                <span class="hide-menu">Antrian</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
-                href="/main/poliumum/riwayat">
-                <i class="ti ti-circle"></i>
-                <span class="hide-menu">Riwayat</span>
-            </a>
-        </li>
-    </ul>
+    class="second-level collapse {{ request()->is('main/poliumum/*') ? 'show' : '' }}"
+    aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}">
+    
+    <li class="sidebar-item">
+        <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
+            href="/main/poliumum/antrian">
+            <i class="ti ti-circle"></i>
+            <span class="hide-menu">Antrian</span>
+        </a>
+    </li>
+    <li class="sidebar-item">
+        <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
+            href="/main/poliumum/riwayat">
+            <i class="ti ti-circle"></i>
+            <span class="hide-menu">Riwayat</span>
+        </a>
+    </li>
+</ul>
 </li>
 
                 <li class="sidebar-item">
