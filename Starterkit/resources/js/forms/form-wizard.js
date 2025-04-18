@@ -69,7 +69,7 @@ advanced_form
       }
       // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
       if (currentIndex === 2 && priorIndex === 3) {
-        advanced_form.steps("previous");
+        advanced_form.steps("Sebelumnya");
       }
     },
     onFinishing: function (event, currentIndex) {
