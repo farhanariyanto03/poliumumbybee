@@ -100,7 +100,7 @@
             <div class="round-16 d-flex align-items-center justify-content-center">
                 <i class="ti ti-circle"></i>
             </div>
-            <span class="hide-menu">Poli Umum</span>
+            <span class="hide-menu ms-3">Poli Umum</span>
         </div>
         <i class="ti ti-chevron-down ms-auto"></i> {{-- ini panahnya --}}
     </a>
