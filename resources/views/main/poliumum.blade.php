@@ -1033,13 +1033,22 @@
         }
     </style>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const nextBtn = document.querySelector('a[href="#next"]');
-      if (nextBtn) {
-        nextBtn.textContent = "Selanjutnya";
-      }
-    });
-  </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const nextBtn = document.querySelector('a[href="#next"]');
+        if (nextBtn) {
+            nextBtn.textContent = "Selanjutnya";
+        }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const nextBtn = document.querySelector('a[href="#previous"]');
+        if (nextBtn) {
+            nextBtn.textContent = "Sebelumnya";
+        }
+        });
+    </script>
 
 @endsection
