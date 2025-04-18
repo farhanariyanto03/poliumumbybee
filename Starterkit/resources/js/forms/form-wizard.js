@@ -65,7 +65,7 @@ advanced_form
     onStepChanged: function (event, currentIndex, priorIndex) {
       // Used to skip the "Warning" step if the user is old enough.
       if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
-        advanced_form.steps("next");
+        advanced_form.steps("Selanjutnya");
       }
       // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
       if (currentIndex === 2 && priorIndex === 3) {
