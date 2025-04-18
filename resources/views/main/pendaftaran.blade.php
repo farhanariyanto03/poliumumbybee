@@ -1041,9 +1041,7 @@
 
 <script>
     $(document).ready(function () {
-        var form = $(".validation-wizard").show();
-
-        $(".validation-wizard").steps({
+        $("#WizardPendaftaran").steps({
             headerTag: "h6",
             bodyTag: "section",
             transitionEffect: "fade",
