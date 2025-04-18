@@ -102,7 +102,7 @@
             </div>
             <span class="hide-menu ms-4">Poli Umum</span>
         </div>
-        <i class="ti ti-chevron-down ms-auto"></i> {{-- ini panahnya --}}
+        <i class="ti ti-chevron-down ms-auto"></i> {{-- ini panahnyaaa --}}
     </a>
 
     <ul id="submenu-poliumum"
