@@ -105,7 +105,7 @@
 
                     <ul id="submenu-poliumum"
                         class="second-level collapse {{ request()->is('main/poliumum') ? 'show' : '' }}"
-                        aria-expanded="{{ request()->is('main/poliumum') ? ''active' : '' }}">
+                        aria-expanded="{{ request()->is('main/poliumum') ? 'active' : '' }}">
 
                         <li class="sidebar-item">
                             <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
