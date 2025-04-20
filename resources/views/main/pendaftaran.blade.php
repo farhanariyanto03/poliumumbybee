@@ -506,7 +506,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="noantian">No Antrian <span
                                                 class="danger"></span></label>
@@ -514,36 +514,23 @@
                                             name="noantian" />
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="nama">Nama</label>
                                         <input type="text" class="form-control" id="nama" name="nama" />
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="no.rm">No. RM</label>
                                         <input type="text" class="form-control" id="no.rm" name="no.rm" />
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="tanggal">Tanggal</label>
                                         <input type="date" class="form-control required" id="tanggal"
                                             name="tanggal" />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="jenispemeriksaan">Jenis Pemeriksaan</label>
-                                        <select class="form-select required" id="jenispemeriksaan"
-                                            data-placeholder="Type to search cities" name="jenispemeriksaan">
-                                            <option value="poliumum">Poli Umum</option>
-                                            <option value="poligigi">Poli Gigi</option>
-                                            <option value="kia">KIA</option>
-                                            <option value="circum">Circum</option>
-                                            <option value="vaksininternasional">Vaksin Internasional</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -1013,16 +1000,7 @@
         document.addEventListener("DOMContentLoaded", function () {
         const nextBtn = document.querySelector('a[href="#next"]');
         if (nextBtn) {
-            nextBtn.textContent = "Selanjutnya";
-        }
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#previous"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Sebelumnya";
+            nextBtn.textContent = "Simpan";
         }
         });
     </script>
