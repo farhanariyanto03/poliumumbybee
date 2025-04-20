@@ -334,36 +334,6 @@
                     <h6>Pemeriksaan Awal</h6>
                     <section>
                         <h4 class="section-title">Data Pendaftaran</h4>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="searchNoRM"
-                                    placeholder="Cari berdasarkan No. RM">
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary" onclick="searchRM()">Cari</button>
-                            </div>
-                        </div>
-                        <script>
-                            function searchRM() {
-                                var input, filter, table, tr, td, i, txtValue;
-                                input = document.getElementById("searchNoRM");
-                                filter = input.value.toUpperCase();
-                                table = document.getElementById("yourTableID"); // Ganti dengan ID tabel Anda
-                                tr = table.getElementsByTagName("tr");
-
-                                for (i = 1; i < tr.length; i++) {
-                                    td = tr[i].getElementsByTagName("td")[1]; // Ubah index sesuai posisi No. RM
-                                    if (td) {
-                                        txtValue = td.textContent || td.innerText;
-                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                            tr[i].style.display = "";
-                                        } else {
-                                            tr[i].style.display = "none";
-                                        }
-                                    }
-                                }
-                            }
-                        </script>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="mb-3">
@@ -531,7 +501,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="noantian">No Antrian <span
                                                 class="danger"></span></label>
@@ -539,36 +509,23 @@
                                             name="noantian" />
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="nama">Nama</label>
                                         <input type="text" class="form-control" id="nama" name="nama" />
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="no.rm">No. RM</label>
                                         <input type="text" class="form-control" id="no.rm" name="no.rm" />
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label class="form-label" for="tanggal">Tanggal</label>
+                                        <label class="form-label" for="tanggal">Tanggal Pemeriksaan</label>
                                         <input type="date" class="form-control required" id="tanggal"
                                             name="tanggal" />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="jenispemeriksaan">Jenis Pemeriksaan</label>
-                                        <select class="form-select required" id="jenispemeriksaan"
-                                            data-placeholder="Type to search cities" name="jenispemeriksaan">
-                                            <option value="poliumum">Poli Umum</option>
-                                            <option value="poligigi">Poli Gigi</option>
-                                            <option value="kia">KIA</option>
-                                            <option value="circum">Circum</option>
-                                            <option value="vaksininternasional">Vaksin Internasional</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
