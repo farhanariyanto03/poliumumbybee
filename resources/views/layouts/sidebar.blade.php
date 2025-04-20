@@ -91,9 +91,9 @@
             <ul class="first-level {{ request()->is('main/polikia') || request()->is('main/poliumum') || request()->is('main/rawat-inap') ? 'in' : '' }} collapse"
                 aria-expanded="false">
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow d-flex justify-content-between align-items-center {{ request()->is('main/poliumum') || request()->is('main/poliumum') ? 'active' : '' }}"
+                    <a class="sidebar-link has-arrow d-flex justify-content-between align-items-center {{ request()->is('main/poliumum') || request()->is('main/poliumum/*') ? 'active' : '' }}"
                         href="#" data-bs-toggle="collapse"
-                        aria-expanded="{{ request()->is('main/poliumum') ? 'active' : '' }}"
+                        aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}"
                         data-bs-target="#submenu-poliumum">
                         <div class="d-flex align-items-center">
                             <div class="round-16 d-flex align-items-center justify-content-center">
@@ -104,8 +104,8 @@
                     </a>
 
                     <ul id="submenu-poliumum"
-                        class="second-level collapse {{ request()->is('main/poliumum') ? 'show' : '' }}"
-                        aria-expanded="{{ request()->is('main/poliumum') ? 'active' : '' }}">
+                        class="second-level collapse {{ request()->is('main/poliumum/*') ? 'show' : '' }}"
+                        aria-expanded="{{ request()->is('main/poliumum/*') ? 'true' : 'false' }}">
 
                         <li class="sidebar-item">
                             <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
