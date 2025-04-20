@@ -93,7 +93,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow d-flex justify-content-between align-items-center {{ request()->is('main/poliumum') || request()->is('main/poliumum') ? 'active' : '' }}"
                         href="#" data-bs-toggle="collapse"
-                        aria-expanded="{{ request()->is('main/poliumum') ? 'true' : 'false' }}"
+                        aria-expanded="{{ request()->is('main/poliumum') ? 'active' : '' }}"
                         data-bs-target="#submenu-poliumum">
                         <div class="d-flex align-items-center">
                             <div class="round-16 d-flex align-items-center justify-content-center">
@@ -105,7 +105,7 @@
 
                     <ul id="submenu-poliumum"
                         class="second-level collapse {{ request()->is('main/poliumum') ? 'show' : '' }}"
-                        aria-expanded="{{ request()->is('main/poliumum') ? 'true' : 'false' }}">
+                        aria-expanded="{{ request()->is('main/poliumum') ? ''active' : '' }}">
 
                         <li class="sidebar-item">
                             <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
