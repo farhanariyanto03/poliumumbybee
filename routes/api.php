@@ -25,3 +25,5 @@ Route::middleware('api')->name('api.')->group(function () {
     Route::post('/obat/{id}/delete', [ObatController::class, 'delete'])->name('obat.delete');
 
 });
+
+Route::get('pendaftaran/{id}', [PoliUmun::class, 'getNoRM'])->name('pendaftaran.show');
