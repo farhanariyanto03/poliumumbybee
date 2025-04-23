@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                     {{-- Contoh data statis. Nanti ini diganti dari controller --}}
-                    @foreach ($antrian as $a)
+                    @foreach ($antreanPoliUmum as $a)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $a->no_rm }}</td>
