@@ -3,9 +3,6 @@
 @section('title', 'SIP-Kes')
 
 @section('pageContent')
-@extends('layouts.app')
-
-@section('content')
 <div class="container py-4">
     <h1 class="mb-4" style="color: #111754; font-weight: 700; font-size: 2.5rem;">Antrean Poli Umum</h1>
 
