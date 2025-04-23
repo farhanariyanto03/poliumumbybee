@@ -5,6 +5,7 @@
 @section('pageContent')
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
     .judul-antrean {
         font-family: 'Montserrat', sans-serif;
@@ -19,6 +20,9 @@
         overflow-x: auto;
         background-color: #ffffff;
         border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 80px; /* biar gak full sampai bawah */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     th {
@@ -26,11 +30,16 @@
         background-color: #F9FAFC !important;
         border: 1px solid #B9B9B9 !important;
         font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        vertical-align: middle;
     }
 
     td {
         white-space: nowrap;
         background-color: white;
+        text-align: center;
+        vertical-align: middle;
     }
 </style>
 
@@ -44,7 +53,7 @@
     </div>
 
     {{-- Table --}}
-    <div class="tabel-wrapper shadow-sm p-3">
+    <div class="tabel-wrapper">
         <table class="table table-bordered">
             <thead>
                 <tr>
