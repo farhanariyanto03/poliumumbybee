@@ -4,6 +4,9 @@
 
 @section('pageContent')
 
+@extends('layouts.app')
+
+@section('content')
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap');
 
@@ -20,12 +23,13 @@
         overflow-x: auto;
         background-color: #ffffff;
         border-radius: 12px;
-        max-height: 600px; /* agar tidak full ke bawah */
-        padding: 16px;
+        max-height: 600px;
+        padding: 24px 32px; /* padding diperbesar */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* shadow diperkuat */
     }
 
     th, td {
-        padding: 8px 12px !important;
+        padding: 10px 16px !important; /* padding antar sel diperbesar sedikit */
         white-space: nowrap;
         text-align: center;
         vertical-align: middle;
@@ -55,8 +59,8 @@
     </div>
 
     {{-- Table --}}
-    <div class="tabel-wrapper shadow-sm">
-        <table class="table table-bordered">
+    <div class="tabel-wrapper">
+        <table class="table table-bordered mb-0">
             <thead>
                 <tr>
                     <th>NO ANTRIAN</th>
