@@ -535,29 +535,28 @@
     </div>
 
     <!-- Diagnosis dan ICD 10 -->
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <div class="card p-3 shadow-sm">
-                <h5 class="fw-bold">Diagnosis</h5>
-                <label class="form-label" for="diagnosis">Diagnosis</label>
-                <textarea id="diagnosis" name="diagnosis" rows="5" class="form-control" placeholder="Ketik diagnosis"></textarea>
+    <div class="col-md-6 mb-4">
+        <div class="card p-3 h-100">
+            <label class="form-label fw-bold">ICD 10 - CM</label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Ketik Kode Tindakan">
+                <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card p-3 shadow-sm">
-                <h5 class="fw-bold">ICD 10</h5>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="search-icd" placeholder="Ketik ICD 10">
-                    <button class="btn btn-secondary" type="button" id="search-btn">Cari</button>
-                </div>
-                <div id="search-results" class="bg-white border rounded p-2" style="display: none;"></div>
-                <label class="form-label fw-medium mt-2">Diagnosa Terpilih</label>
-                <div id="selected-icds" class="border p-2 rounded bg-light">
-                    <p class="text-muted text-center mb-0" id="no-icd-selected">Belum ada diagnosa yang dipilih</p>
-                </div>
-            </div>
+            <table class="table table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nama ICD 10 - CM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tidak Ada Data</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
 
     <!-- Subjective dan Objective -->
     <div class="row mb-3">
