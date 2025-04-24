@@ -476,8 +476,9 @@
                     </section>
 
                     <!-- Step 3 -->
+<!-- Step 3 -->
 <h6 class="fw-bold mt-4">Pemeriksaan</h6>
-<section style="overflow-y: auto; max-height: 90vh;">
+<section>
     <h4 class="section-title mb-3">Data Pemeriksaan</h4>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="d-flex align-items-center">
@@ -603,6 +604,7 @@
             </div>
         </div>
     </div>
+
     <div class="card p-3 mb-4">
     <div class="row">
         <div class="col-md-6">
