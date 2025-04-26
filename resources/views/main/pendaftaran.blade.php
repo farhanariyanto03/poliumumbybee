@@ -966,6 +966,10 @@ body {
                 <script>
                 const canvas = document.getElementById('signature-pad');
                 const ctx = canvas.getContext('2d');
+                // SET WARNA DAN KETEBALAN
+                ctx.strokeStyle = "#000000"; // Warna hitam
+                ctx.lineWidth = 5; // Coretan tipis rap
+                
                 let isDrawing = false;
 
                 // Mouse Events
