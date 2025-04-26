@@ -487,7 +487,7 @@ body {
                                 </ul>
                             </div>
                         </div>
-                        <!-- Modal Surat Keterangan Sehat -->
+                        <!-- Modal Surat Keterangan Sehat
                         <div class="modal fade" id="modalSehat" tabindex="-1" aria-labelledby="modalSehatLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -638,7 +638,7 @@ body {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="d-flex">
                             <input type="text" class="form-control me-2" id="searchNoRM" placeholder="Cari No. RM">
