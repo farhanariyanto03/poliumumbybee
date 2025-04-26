@@ -734,6 +734,75 @@ body {
                             </div>
                         </div>
                     </div>
+                    <style>
+                    /* Styling khusus untuk modal Surat Keterangan Sehat */
+                    #modalSehat .modal-content {
+                        border-radius: 20px;
+                        padding: 30px;
+                        box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+                        border: none;
+                    }
+
+                    #modalSehat .modal-header {
+                        border-bottom: none;
+                    }
+
+                    #modalSehat .modal-title {
+                        font-size: 32px;
+                        font-weight: 800;
+                        color: #0a0f5c;
+                        /* Biru tua */
+                        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                    }
+
+                    #modalSehat label.form-label {
+                        font-weight: 600;
+                    }
+
+                    #modalSehat input.form-control,
+                    #modalSehat select.form-select,
+                    #modalSehat textarea.form-control {
+                        border-radius: 10px;
+                        background-color: #f9f9f9;
+                        border: 1px solid #dcdcdc;
+                    }
+
+                    #modalSehat input::placeholder,
+                    #modalSehat textarea::placeholder {
+                        color: #c0c0c0;
+                        font-style: italic;
+                    }
+
+                    #modalSehat .btn-primary {
+                        background-color: #2959f7;
+                        font-weight: 600;
+                        font-size: 16px;
+                        padding: 10px 0;
+                        border-radius: 25px;
+                        box-shadow: 0px 5px 15px rgba(41, 89, 247, 0.4);
+                        border: none;
+                    }
+
+                    #modalSehat .btn-primary:hover {
+                        background-color: #1834a7;
+                    }
+
+                    #modalSehat .btn-close {
+                        font-size: 1.2rem;
+                    }
+
+                    /* Responsive kecil: padding lebih kecil */
+                    @media (max-width: 576px) {
+                        #modalSehat .modal-content {
+                            padding: 20px;
+                        }
+
+                        #modalSehat .modal-title {
+                            font-size: 26px;
+                        }
+                    }
+                    </style>
+
 
                     <!-- Assessment dan Plan -->
                     <div class="row mb-3">
@@ -887,177 +956,179 @@ body {
                     </div>
                 </section>
                 <!-- Step 4 -->
-                
-@endsection
 
-@section('scripts')
-<script src="{{ URL::asset('build/js/vendor.min.js') }}"></script>
-<script src="{{ URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
-<script src="{{ URL::asset('build/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-<script src="{{ URL::asset('build/js/forms/form-wizard.js') }}"></script>
-<script src="{{ URL::asset('build/libs/inputmask/dist/jquery.inputmask.min.js') }}"></script>
-<script src="{{ URL::asset('build/js/forms/mask.init.js') }}"></script>
+                @endsection
 
-<!-- ICD-10 Search Script -->
-<script>
-$(document).ready(function() {
-    // Variables to track selected ICDs
-    let selectedICDs = [];
+                @section('scripts')
+                <script src="{{ URL::asset('build/js/vendor.min.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+                <script src="{{ URL::asset('build/js/forms/form-wizard.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/inputmask/dist/jquery.inputmask.min.js') }}"></script>
+                <script src="{{ URL::asset('build/js/forms/mask.init.js') }}"></script>
 
-    // Handle search input
-    $('#search-icd').on('input', function() {
-        const searchTerm = $(this).val();
+                <!-- ICD-10 Search Script -->
+                <script>
+                $(document).ready(function() {
+                    // Variables to track selected ICDs
+                    let selectedICDs = [];
 
-        if (searchTerm.length < 2) {
-            $('#search-results').hide();
-            return;
-        }
+                    // Handle search input
+                    $('#search-icd').on('input', function() {
+                        const searchTerm = $(this).val();
 
-        // Make AJAX request to search endpoint
-        $.ajax({
-            url: '{{ url('
-            search_icd.php ') }}',
-            data: {
-                term: searchTerm
-            },
-            dataType: 'json',
-            success: function(data) {
-                // Clear previous results
-                $('#search-results').empty();
+                        if (searchTerm.length < 2) {
+                            $('#search-results').hide();
+                            return;
+                        }
 
-                if (data.length > 0) {
-                    // Add each result to dropdown
-                    data.forEach(function(item) {
-                        $('#search-results').append(
-                            `<div class="search-item p-2 border-bottom hover-bg" data-id="${item.id}" data-name="${item.name}">
+                        // Make AJAX request to search endpoint
+                        $.ajax({
+                            url: '{{ url('
+                            search_icd.php ') }}',
+                            data: {
+                                term: searchTerm
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                // Clear previous results
+                                $('#search-results').empty();
+
+                                if (data.length > 0) {
+                                    // Add each result to dropdown
+                                    data.forEach(function(item) {
+                                        $('#search-results').append(
+                                            `<div class="search-item p-2 border-bottom hover-bg" data-id="${item.id}" data-name="${item.name}">
                                     <strong>${item.id}</strong> - ${item.name}
                                 </div>`
-                        );
+                                        );
+                                    });
+
+                                    // Show results dropdown
+                                    $('#search-results').show();
+                                } else {
+                                    $('#search-results').append(
+                                        `<div class="p-2 text-muted">Tidak ada hasil ditemukan</div>`
+                                    );
+                                    $('#search-results').show();
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error searching ICD:', error);
+                                $('#search-results').html(
+                                    '<div class="p-2 text-danger">Error searching: ' +
+                                    error +
+                                    '</div>');
+                                $('#search-results').show();
+                            }
+                        });
                     });
 
-                    // Show results dropdown
-                    $('#search-results').show();
-                } else {
-                    $('#search-results').append(
-                        `<div class="p-2 text-muted">Tidak ada hasil ditemukan</div>`
-                    );
-                    $('#search-results').show();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error searching ICD:', error);
-                $('#search-results').html(
-                    '<div class="p-2 text-danger">Error searching: ' + error +
-                    '</div>');
-                $('#search-results').show();
-            }
-        });
-    });
+                    // Handle search button click
+                    $('#search-btn').click(function() {
+                        const searchTerm = $('#search-icd').val();
+                        if (searchTerm.length >= 2) {
+                            // Trigger the same search process
+                            $('#search-icd').trigger('input');
+                        }
+                    });
 
-    // Handle search button click
-    $('#search-btn').click(function() {
-        const searchTerm = $('#search-icd').val();
-        if (searchTerm.length >= 2) {
-            // Trigger the same search process
-            $('#search-icd').trigger('input');
-        }
-    });
+                    // Handle selecting an ICD from the results
+                    $(document).on('click', '.search-item', function() {
+                        const id = $(this).data('id');
+                        const name = $(this).data('name');
 
-    // Handle selecting an ICD from the results
-    $(document).on('click', '.search-item', function() {
-        const id = $(this).data('id');
-        const name = $(this).data('name');
+                        // Check if already selected
+                        if (!selectedICDs.some(item => item.id === id)) {
+                            // Add to selected ICDs
+                            selectedICDs.push({
+                                id,
+                                name
+                            });
 
-        // Check if already selected
-        if (!selectedICDs.some(item => item.id === id)) {
-            // Add to selected ICDs
-            selectedICDs.push({
-                id,
-                name
-            });
+                            // Update the display of selected ICDs
+                            updateSelectedICDs();
+                        }
 
-            // Update the display of selected ICDs
-            updateSelectedICDs();
-        }
+                        // Clear search and hide results
+                        $('#search-icd').val('');
+                        $('#search-results').hide();
+                    });
 
-        // Clear search and hide results
-        $('#search-icd').val('');
-        $('#search-results').hide();
-    });
+                    // Function to update display of selected ICDs
+                    function updateSelectedICDs() {
+                        const container = $('#selected-icds');
 
-    // Function to update display of selected ICDs
-    function updateSelectedICDs() {
-        const container = $('#selected-icds');
+                        if (selectedICDs.length === 0) {
+                            container.html(
+                                '<p class="text-muted text-center mb-0" id="no-icd-selected">Belum ada diagnosa yang dipilih</p>'
+                            );
+                        } else {
+                            container.empty();
 
-        if (selectedICDs.length === 0) {
-            container.html(
-                '<p class="text-muted text-center mb-0" id="no-icd-selected">Belum ada diagnosa yang dipilih</p>'
-            );
-        } else {
-            container.empty();
-
-            selectedICDs.forEach(function(item, index) {
-                container.append(
-                    `<div class="selected-icd-item mb-1 d-flex align-items-center">
+                            selectedICDs.forEach(function(item, index) {
+                                container.append(
+                                    `<div class="selected-icd-item mb-1 d-flex align-items-center">
                             <span class="me-auto"><strong>${item.id}</strong> - ${item.name}</span>
                             <button type="button" class="btn btn-sm btn-outline-danger remove-icd" data-index="${index}">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>`
-                );
-            });
-        }
-    }
+                                );
+                            });
+                        }
+                    }
 
-    // Handle removing a selected ICD
-    $(document).on('click', '.remove-icd', function() {
-        const index = $(this).data('index');
-        selectedICDs.splice(index, 1);
-        updateSelectedICDs();
-    });
+                    // Handle removing a selected ICD
+                    $(document).on('click', '.remove-icd', function() {
+                        const index = $(this).data('index');
+                        selectedICDs.splice(index, 1);
+                        updateSelectedICDs();
+                    });
 
-    // Close dropdown when clicking outside
-    $(document).on('click', function(event) {
-        if (!$(event.target).closest('#search-icd, #search-results, #search-btn').length) {
-            $('#search-results').hide();
-        }
-    });
-});
-</script>
+                    // Close dropdown when clicking outside
+                    $(document).on('click', function(event) {
+                        if (!$(event.target).closest('#search-icd, #search-results, #search-btn')
+                            .length) {
+                            $('#search-results').hide();
+                        }
+                    });
+                });
+                </script>
 
-<!-- Tambahkan CSS untuk fitur ICD-10 -->
-<style>
-.search-item {
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+                <!-- Tambahkan CSS untuk fitur ICD-10 -->
+                <style>
+                .search-item {
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                }
 
-.search-item:hover {
-    background-color: #f8f9fa;
-}
+                .search-item:hover {
+                    background-color: #f8f9fa;
+                }
 
-.selected-icd-item {
-    background-color: #e9f7fe;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
+                .selected-icd-item {
+                    background-color: #e9f7fe;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                }
 
-#search-results {
-    border: 1px solid #ced4da;
-    border-radius: 0 0 5px 5px;
-}
+                #search-results {
+                    border: 1px solid #ced4da;
+                    border-radius: 0 0 5px 5px;
+                }
 
-.hover-bg:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
+                .hover-bg:hover {
+                    background-color: #f0f0f0;
+                    cursor: pointer;
+                }
 
-.z-index-dropdown {
-    z-index: 1000;
-}
+                .z-index-dropdown {
+                    z-index: 1000;
+                }
 
-.min-height-80 {
-    min-height: 80px;
-}
-</style>
-@endsection
+                .min-height-80 {
+                    min-height: 80px;
+                }
+                </style>
+                @endsection
