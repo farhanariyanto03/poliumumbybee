@@ -1097,6 +1097,7 @@ body {
 
                 <!-- Step 4 -->
                  <section>
+                 @include('pendaftaran.step4')
             </section>
 
                 @endsection
