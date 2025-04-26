@@ -963,6 +963,63 @@ body {
                         </div>
                     </div>
                 </section>
+                <script>
+                const canvas = document.getElementById('signature-pad');
+                const ctx = canvas.getContext('2d');
+                let isDrawing = false;
+
+                // Mouse Events
+                canvas.addEventListener('mousedown', (e) => {
+                    isDrawing = true;
+                    ctx.beginPath();
+                    ctx.moveTo(e.offsetX, e.offsetY);
+                });
+
+                canvas.addEventListener('mousemove', (e) => {
+                    if (isDrawing) {
+                        ctx.lineTo(e.offsetX, e.offsetY);
+                        ctx.stroke();
+                    }
+                });
+
+                canvas.addEventListener('mouseup', () => {
+                    isDrawing = false;
+                });
+
+                canvas.addEventListener('mouseleave', () => {
+                    isDrawing = false;
+                });
+
+                // Touch Events
+                canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault(); // Mencegah scroll saat menggambar
+                    isDrawing = true;
+                    const touch = e.touches[0];
+                    const rect = canvas.getBoundingClientRect();
+                    ctx.beginPath();
+                    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                });
+
+                canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault(); // Mencegah scroll saat menggambar
+                    if (isDrawing) {
+                        const touch = e.touches[0];
+                        const rect = canvas.getBoundingClientRect();
+                        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                        ctx.stroke();
+                    }
+                });
+
+                canvas.addEventListener('touchend', () => {
+                    isDrawing = false;
+                });
+
+                // Clear Button
+                document.getElementById('clear-signature').addEventListener('click', () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+                </script>
+
                 <!-- Step 4 -->
 
                 @endsection
