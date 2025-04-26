@@ -611,18 +611,25 @@ body {
                                                     <p>Dokter yang memeriksa:</p>
 
                                                     <!-- Canvas untuk tanda tangan -->
-                                                    <canvas id="signature-pad"
-                                                        style="border: 1px solid #ccc; border-radius: 10px; width: 100%; height: 150px;"></canvas>
+                                                    <div
+                                                        style="border: 1px solid #ccc; border-radius: 10px; position: relative;">
+                                                        <canvas id="signature-pad" width="100%" height="150px"
+                                                            style="display: block; background-color: #f8f9fa;"></canvas>
+                                                        <small class="text-muted"
+                                                            style="position: absolute; bottom: 5px; left: 10px;">
+                                                            Tanda tangan di area ini
+                                                        </small>
+                                                    </div>
 
                                                     <!-- Tombol untuk reset tanda tangan -->
                                                     <button type="button" class="btn btn-outline-secondary btn-sm mt-2"
-                                                        id="clear-signature">Hapus Tanda Tangan</button>
+                                                        id="clear-signature">
+                                                        <i class="bi bi-eraser"></i> Hapus Tanda Tangan
+                                                    </button>
 
                                                     <p class="mt-3">(Nama Dokter)</p>
                                                     <p>SIP</p>
                                                 </div>
-
-
                                                 <div class="d-grid mt-4">
                                                     <button type="submit"
                                                         class="btn btn-primary rounded-pill">Simpan</button>
@@ -809,8 +816,22 @@ body {
                             font-size: 26px;
                         }
                     }
-                    </style>
 
+                    /* Tambahkan ke stylesheet Anda */
+                    #signature-pad {
+                        touch-action: none;
+                        /* Penting untuk perangkat touch */
+                        cursor: crosshair;
+                    }
+
+                    .signature-instruction {
+                        position: absolute;
+                        bottom: 5px;
+                        left: 10px;
+                        color: #6c757d;
+                        font-size: 0.8rem;
+                    }
+                    </style>
 
                     <!-- Assessment dan Plan -->
                     <div class="row mb-3">
@@ -964,52 +985,115 @@ body {
                     </div>
                 </section>
                 <script>
-  const canvas = document.getElementById('signature-pad');
-  const ctx = canvas.getContext('2d');
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Inisialisasi canvas ketika modal ditampilkan
+                    $('#modalSehat').on('shown.bs.modal', function() {
+                        initSignaturePad();
+                    });
 
-  // Set warna coretan & ketebalan
-  ctx.strokeStyle = "#000000"; // hitam
-  ctx.lineWidth = 2;
+                    function initSignaturePad() {
+                        const canvas = document.getElementById('signature-pad');
+                        const ctx = canvas.getContext('2d');
 
-  let isDrawing = false;
+                        // Atur ukuran canvas yang tepat
+                        function resizeCanvas() {
+                            const container = canvas.parentElement;
+                            canvas.width = container.offsetWidth;
+                            canvas.height = container.offsetHeight;
+                            ctx.lineWidth = 2;
+                            ctx.lineCap = 'round';
+                            ctx.strokeStyle = '#000000';
+                        }
 
-  // Event untuk semua input (mouse, touch, stylus, touchpad)
-  canvas.addEventListener('pointerdown', (e) => {
-    isDrawing = true;
-    ctx.beginPath();
-    const pos = getCanvasCoordinates(e);
-    ctx.moveTo(pos.x, pos.y);
-  });
+                        resizeCanvas();
 
-  canvas.addEventListener('pointermove', (e) => {
-    if (!isDrawing) return;
-    const pos = getCanvasCoordinates(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-  });
+                        // Variabel untuk tracking
+                        let isDrawing = false;
+                        let lastX = 0;
+                        let lastY = 0;
 
-  canvas.addEventListener('pointerup', () => {
-    isDrawing = false;
-  });
+                        // Fungsi untuk mendapatkan posisi mouse/touch
+                        function getPosition(e) {
+                            let posX, posY;
+                            if (e.type.includes('touch')) {
+                                const touch = e.touches[0] || e.changedTouches[0];
+                                const rect = canvas.getBoundingClientRect();
+                                posX = touch.clientX - rect.left;
+                                posY = touch.clientY - rect.top;
+                            } else {
+                                const rect = canvas.getBoundingClientRect();
+                                posX = e.clientX - rect.left;
+                                posY = e.clientY - rect.top;
+                            }
+                            return {
+                                x: posX,
+                                y: posY
+                            };
+                        }
 
-  canvas.addEventListener('pointerleave', () => {
-    isDrawing = false;
-  });
+                        // Event listeners untuk mouse
+                        canvas.addEventListener('mousedown', (e) => {
+                            const pos = getPosition(e);
+                            isDrawing = true;
+                            [lastX, lastY] = [pos.x, pos.y];
+                            e.preventDefault();
+                        });
 
-  // Fungsi bantu buat dapetin posisi relatif di canvas
-  function getCanvasCoordinates(event) {
-    const rect = canvas.getBoundingClientRect();
-    return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
-    };
-  }
+                        canvas.addEventListener('mousemove', (e) => {
+                            if (!isDrawing) return;
+                            const pos = getPosition(e);
+                            draw(pos.x, pos.y);
+                            e.preventDefault();
+                        });
 
-  // Tombol hapus tanda tangan
-  document.getElementById('clear-signature').addEventListener('click', () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  });
-</script>
+                        canvas.addEventListener('mouseup', () => {
+                            isDrawing = false;
+                        });
+
+                        canvas.addEventListener('mouseout', () => {
+                            isDrawing = false;
+                        });
+
+                        // Event listeners untuk touch
+                        canvas.addEventListener('touchstart', (e) => {
+                            const pos = getPosition(e);
+                            isDrawing = true;
+                            [lastX, lastY] = [pos.x, pos.y];
+                            e.preventDefault();
+                        });
+
+                        canvas.addEventListener('touchmove', (e) => {
+                            if (!isDrawing) return;
+                            const pos = getPosition(e);
+                            draw(pos.x, pos.y);
+                            e.preventDefault();
+                        });
+
+                        canvas.addEventListener('touchend', () => {
+                            isDrawing = false;
+                        });
+
+                        // Fungsi menggambar
+                        function draw(x, y) {
+                            ctx.beginPath();
+                            ctx.moveTo(lastX, lastY);
+                            ctx.lineTo(x, y);
+                            ctx.stroke();
+                            [lastX, lastY] = [x, y];
+                        }
+
+                        // Tombol hapus
+                        document.getElementById('clear-signature').addEventListener('click', () => {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        });
+
+                        // Handle resize window
+                        window.addEventListener('resize', () => {
+                            resizeCanvas();
+                        });
+                    }
+                });
+                </script>
 
                 <!-- Step 4 -->
 
