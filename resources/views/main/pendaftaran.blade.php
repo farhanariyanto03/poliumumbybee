@@ -984,6 +984,29 @@ body {
                     </div>
                 </div>
                 </section>
+                
+
+                <!-- Step 4 -->
+                 <section>
+                </section>
+                    
+                <div class="step-content" data-step="4" style="display:none;">
+                    <div class="empty-step">
+                        <i class="bi bi-clipboard2-plus"></i>
+                        <h4>Diagnosa dan Tindakan</h4>
+                        <p class="text-muted">Bagian ini sengaja dikosongkan</p>
+                    </div>
+                </div>
+
+                @endsection
+
+                @section('scripts')
+                <script src="{{ URL::asset('build/js/vendor.min.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+                <script src="{{ URL::asset('build/js/forms/form-wizard.js') }}"></script>
+                <script src="{{ URL::asset('build/libs/inputmask/dist/jquery.inputmask.min.js') }}"></script>
+                <script src="{{ URL::asset('build/js/forms/mask.init.js') }}"></script>
                 <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     // Inisialisasi canvas ketika modal ditampilkan
@@ -1094,26 +1117,6 @@ body {
                     }
                 });
                 </script>
-
-                <!-- Step 4 -->
-                <div class="step-content" data-step="4" style="display:none;">
-                    <div class="empty-step">
-                        <i class="bi bi-clipboard2-plus"></i>
-                        <h4>Diagnosa dan Tindakan</h4>
-                        <p class="text-muted">Bagian ini sengaja dikosongkan</p>
-                    </div>
-                </div>
-
-                @endsection
-
-                @section('scripts')
-                <script src="{{ URL::asset('build/js/vendor.min.js') }}"></script>
-                <script src="{{ URL::asset('build/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
-                <script src="{{ URL::asset('build/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-                <script src="{{ URL::asset('build/js/forms/form-wizard.js') }}"></script>
-                <script src="{{ URL::asset('build/libs/inputmask/dist/jquery.inputmask.min.js') }}"></script>
-                <script src="{{ URL::asset('build/js/forms/mask.init.js') }}"></script>
-
                 <!-- ICD-10 Search Script -->
                 <script>
                 $(document).ready(function() {
