@@ -964,65 +964,52 @@ body {
                     </div>
                 </section>
                 <script>
-                const canvas = document.getElementById('signature-pad');
-                const ctx = canvas.getContext('2d');
-                // SET WARNA DAN KETEBALAN
-                ctx.strokeStyle = "#000000"; // Warna hitam
-                ctx.lineWidth = 5; // Coretan tipis rap
-                
-                let isDrawing = false;
+  const canvas = document.getElementById('signature-pad');
+  const ctx = canvas.getContext('2d');
 
-                // Mouse Events
-                canvas.addEventListener('mousedown', (e) => {
-                    isDrawing = true;
-                    ctx.beginPath();
-                    ctx.moveTo(e.offsetX, e.offsetY);
-                });
+  // Set warna coretan & ketebalan
+  ctx.strokeStyle = "#000000"; // hitam
+  ctx.lineWidth = 2;
 
-                canvas.addEventListener('mousemove', (e) => {
-                    if (isDrawing) {
-                        ctx.lineTo(e.offsetX, e.offsetY);
-                        ctx.stroke();
-                    }
-                });
+  let isDrawing = false;
 
-                canvas.addEventListener('mouseup', () => {
-                    isDrawing = false;
-                });
+  // Event untuk semua input (mouse, touch, stylus, touchpad)
+  canvas.addEventListener('pointerdown', (e) => {
+    isDrawing = true;
+    ctx.beginPath();
+    const pos = getCanvasCoordinates(e);
+    ctx.moveTo(pos.x, pos.y);
+  });
 
-                canvas.addEventListener('mouseleave', () => {
-                    isDrawing = false;
-                });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!isDrawing) return;
+    const pos = getCanvasCoordinates(e);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  });
 
-                // Touch Events
-                canvas.addEventListener('touchstart', (e) => {
-                    e.preventDefault(); // Mencegah scroll saat menggambar
-                    isDrawing = true;
-                    const touch = e.touches[0];
-                    const rect = canvas.getBoundingClientRect();
-                    ctx.beginPath();
-                    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
-                });
+  canvas.addEventListener('pointerup', () => {
+    isDrawing = false;
+  });
 
-                canvas.addEventListener('touchmove', (e) => {
-                    e.preventDefault(); // Mencegah scroll saat menggambar
-                    if (isDrawing) {
-                        const touch = e.touches[0];
-                        const rect = canvas.getBoundingClientRect();
-                        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-                        ctx.stroke();
-                    }
-                });
+  canvas.addEventListener('pointerleave', () => {
+    isDrawing = false;
+  });
 
-                canvas.addEventListener('touchend', () => {
-                    isDrawing = false;
-                });
+  // Fungsi bantu buat dapetin posisi relatif di canvas
+  function getCanvasCoordinates(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
+  }
 
-                // Clear Button
-                document.getElementById('clear-signature').addEventListener('click', () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                });
-                </script>
+  // Tombol hapus tanda tangan
+  document.getElementById('clear-signature').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+</script>
 
                 <!-- Step 4 -->
 
