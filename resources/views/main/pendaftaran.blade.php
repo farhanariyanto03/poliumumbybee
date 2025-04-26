@@ -1096,9 +1096,13 @@ body {
                 </script>
 
                 <!-- Step 4 -->
-                 <section>
-                 @include('pendaftaran.step4')
-            </section>
+                <div class="step-content" data-step="4" style="display:none;">
+                    <div class="empty-step">
+                        <i class="bi bi-clipboard2-plus"></i>
+                        <h4>Diagnosa dan Tindakan</h4>
+                        <p class="text-muted">Bagian ini sengaja dikosongkan</p>
+                    </div>
+                </div>
 
                 @endsection
 
