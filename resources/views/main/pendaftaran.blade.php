@@ -487,7 +487,6 @@ body {
                                 </ul>
                             </div>
                         </div>
-
                         <!-- Modal Surat Keterangan Sehat -->
                         <div class="modal fade" id="modalSehat" tabindex="-1" aria-labelledby="modalSehatLabel"
                             aria-hidden="true">
@@ -983,6 +982,7 @@ body {
                             </div>
                         </div>
                     </div>
+                </div>
                 </section>
                 <script>
                 document.addEventListener('DOMContentLoaded', function() {
