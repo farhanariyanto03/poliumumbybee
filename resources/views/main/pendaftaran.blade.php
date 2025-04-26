@@ -1096,6 +1096,8 @@ body {
                 </script>
 
                 <!-- Step 4 -->
+                 <section>
+            </section>
 
                 @endsection
 
