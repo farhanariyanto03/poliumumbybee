@@ -609,11 +609,19 @@ body {
                                                 <div class="mt-4 text-end">
                                                     <p>Jember,</p>
                                                     <p>Dokter yang memeriksa:</p>
-                                                    <textarea class="form-control mb-2" rows="2"
-                                                        placeholder="Nama Dokter"></textarea>
-                                                    <p>(Nama Dokter)</p>
+
+                                                    <!-- Canvas untuk tanda tangan -->
+                                                    <canvas id="signature-pad"
+                                                        style="border: 1px solid #ccc; border-radius: 10px; width: 100%; height: 150px;"></canvas>
+
+                                                    <!-- Tombol untuk reset tanda tangan -->
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm mt-2"
+                                                        id="clear-signature">Hapus Tanda Tangan</button>
+
+                                                    <p class="mt-3">(Nama Dokter)</p>
                                                     <p>SIP</p>
                                                 </div>
+
 
                                                 <div class="d-grid mt-4">
                                                     <button type="submit"
