@@ -8,6 +8,6 @@ class SuratKeteranganSakitController extends Controller
 {
     public function index()
     {
-        return view('surat-keterangan-sakit');
+        return view('main.surat-keterangan-sakit');
     }
 }
