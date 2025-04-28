@@ -5,9 +5,6 @@
 @section('title', 'SIP-Kes')
 
 @section('pageContent')
-@extends('layouts.app') {{-- Sesuaikan dengan layoutmu --}}
-
-@section('content')
 <div class="container py-4">
     <h1 class="text-center fw-bold" style="font-size: 3rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
         Surat Keterangan Sakit
@@ -15,9 +12,9 @@
 
     <div class="d-flex justify-content-end my-4">
         <div class="input-group" style="width: 300px;">
-            <input type="text" class="form-control" placeholder="Data Pasien" aria-label="Search">
+            <input type="text" class="form-control" placeholder="Data Pasien">
             <button class="btn btn-primary" type="button">
-                <i class="fas fa-search"></i> {{-- Pastikan fontawesome sudah di-include --}}
+                <i class="fas fa-search"></i>
             </button>
         </div>
     </div>
@@ -37,29 +34,38 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle text-center">
-                        @foreach ($pasien as $index => $item)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggal_periksa)->format('d-m-Y') }}</td>
-                                <td>{{ $item->no_rm }}</td>
-                                <td>{{ $item->nomor_surat }}</td>
-                                <td>{{ $item->nama_pasien }}</td>
-                                <td class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('surat.cetak', $item->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-print"></i> Cetak
-                                    </a>
-                                    <a href="{{ route('surat.detail', $item->id) }}" class="btn btn-info btn-sm">
-                                        Detail
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        {{-- Kalau data kosong --}}
-                        @if($pasien->isEmpty())
-                            <tr>
-                                <td colspan="6">Data tidak ditemukan</td>
-                            </tr>
-                        @endif
+                        {{-- Dummy data --}}
+                        <tr>
+                            <td>1</td>
+                            <td>17-04-2025</td>
+                            <td>RM000123</td>
+                            <td>30/B/IIM/IV/2025</td>
+                            <td>Laili Fitriana</td>
+                            <td class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-print"></i> Cetak
+                                </button>
+                                <button class="btn btn-info btn-sm">
+                                    Detail
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>17-04-2025</td>
+                            <td>RM000124</td>
+                            <td>31/B/IIM/IV/2025</td>
+                            <td>Dewitasari Putri</td>
+                            <td class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-print"></i> Cetak
+                                </button>
+                                <button class="btn btn-info btn-sm">
+                                    Detail
+                                </button>
+                            </td>
+                        </tr>
+                        {{-- Tambahkan dummy baris lain kalau mau --}}
                     </tbody>
                 </table>
             </div>
