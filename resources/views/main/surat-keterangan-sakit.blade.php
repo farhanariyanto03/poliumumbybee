@@ -5,8 +5,29 @@
 @section('title', 'SIP-Kes')
 
 @section('pageContent')
+{{-- Include Montserrat font dari Google Fonts --}}
+@push('styles')
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+@endpush
+
+<style>
+    .judul-halaman {
+        font-family: 'Montserrat', sans-serif;
+        color: #111754;
+        font-weight: 700;
+    }
+    .table thead {
+        background-color: #B9B9B9;
+    }
+    .table thead th {
+        font-weight: bold;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+
 <div class="container py-4">
-    <h1 class="text-center fw-bold" style="font-size: 3rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+    <h1 class="text-center judul-halaman" style="font-size: 3rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
         Surat Keterangan Sakit
     </h1>
 
@@ -23,7 +44,7 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-bordered mb-0">
-                    <thead class="text-center">
+                    <thead>
                         <tr>
                             <th>NO.</th>
                             <th>TANGGAL PERIKSA</th>
@@ -65,7 +86,7 @@
                                 </button>
                             </td>
                         </tr>
-                        {{-- Tambahkan dummy baris lain kalau mau --}}
+                        {{-- Tambahkan data dummy lainnya jika mau --}}
                     </tbody>
                 </table>
             </div>
