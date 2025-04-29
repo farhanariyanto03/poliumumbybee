@@ -43,7 +43,7 @@
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered mb-0">
+                <table class="table table-bordered">
                     <thead style="background-color: #B3B9F9;">
                         <tr>
                             <th>NO.</th>
