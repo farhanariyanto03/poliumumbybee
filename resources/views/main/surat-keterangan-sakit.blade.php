@@ -44,7 +44,7 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-bordered mb-0">
-                    <thead>
+                    <thead style="background-color: #B3B9F9;">
                         <tr>
                             <th>NO.</th>
                             <th>TANGGAL PERIKSA</th>
