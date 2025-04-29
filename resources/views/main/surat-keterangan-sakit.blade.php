@@ -17,7 +17,7 @@
         font-weight: 700;
     }
     .table thead {
-        background-color: #B9B9B9;
+        background-color: #B3B9F9;
     }
     .table thead th {
         font-weight: bold;
