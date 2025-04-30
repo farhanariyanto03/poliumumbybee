@@ -76,48 +76,51 @@
             </a>
         </li>
         @php
-    $pemeriksaanActive = request()->is('main/poliumum*') || request()->is('main/polikia*') || request()->is('main/rawat-inap*') || request()->is('main/layanan*');
-    $poliUmumActive = request()->is('main/poliumum*');
+    $isPoliumum = request()->is('main/poliumum') || request()->is('main/poliumum/*');
+    $isPolikia = request()->is('main/layanan') || request()->is('main/layanan/*');
+    $isRawatInap = request()->is('main/rawat-inap') || request()->is('main/rawat-inap/*');
+    $isUGD = request()->is('/'); // ganti jika rute UGD berbeda
+    $isPemeriksaanOpen = $isPoliumum || $isPolikia || $isRawatInap || $isUGD;
 @endphp
 
 <li class="sidebar-item">
-    <a class="sidebar-link has-arrow {{ $pemeriksaanActive ? 'active' : '' }}" href="javascript:void(0)">
-        <span class="d-flex">
-            <svg class="bi bi-heart-pulse" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                fill="currentColor" viewBox="0 0 16 16">
-                <path d="..."/>
-                <path d="..."/>
+    <a class="sidebar-link has-arrow {{ $isPemeriksaanOpen ? 'active' : '' }}"
+        href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#menu-pemeriksaan"
+        aria-expanded="{{ $isPemeriksaanOpen ? 'true' : 'false' }}">
+        <span class="d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-heart-pulse me-2" viewBox="0 0 16 16">
+                <path
+                    d="M1 6.5C1 3.462 3.462 1 6.5 1S12 3.462 12 6.5a5.5 5.5 0 0 1-11 0ZM6.5 0a6.5 6.5 0 0 0 0 13 6.5 6.5 0 0 0 0-13Z" />
+                <path
+                    d="M10.354 5.646a.5.5 0 0 0-.708.708L11.293 8H9.5a.5.5 0 0 0 0 1h1.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5Z" />
             </svg>
+            <span class="hide-menu">Pemeriksaan</span>
         </span>
-        <span class="hide-menu">Pemeriksaan</span>
     </a>
 
-    <ul class="first-level collapse {{ $pemeriksaanActive ? 'show' : '' }}" aria-expanded="{{ $pemeriksaanActive ? 'true' : 'false' }}">
-
-        {{-- Poli Umum --}}
+    <ul id="menu-pemeriksaan" class="first-level collapse {{ $isPemeriksaanOpen ? 'show' : '' }}">
+        {{-- POLI UMUM --}}
         <li class="sidebar-item">
-            <a class="sidebar-link has-arrow d-flex justify-content-between align-items-center {{ $poliUmumActive ? 'active' : '' }}"
+            <a class="sidebar-link has-arrow {{ $isPoliumum ? 'active' : '' }}"
                 href="javascript:void(0)" data-bs-toggle="collapse"
-                data-bs-target="#submenu-poliumum" aria-expanded="{{ $poliUmumActive ? 'true' : 'false' }}">
+                data-bs-target="#submenu-poliumum" aria-expanded="{{ $isPoliumum ? 'true' : 'false' }}">
                 <div class="d-flex align-items-center">
-                    <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
-                    </div>
-                    <span class="hide-menu ms-4">Poli Umum</span>
+                    <i class="ti ti-circle"></i>
+                    <span class="hide-menu ms-2">Poli Umum</span>
                 </div>
             </a>
 
-            <ul id="submenu-poliumum" class="second-level collapse {{ $poliUmumActive ? 'show' : '' }}"
-                aria-expanded="{{ $poliUmumActive ? 'true' : 'false' }}">
+            <ul id="submenu-poliumum" class="second-level collapse {{ $isPoliumum ? 'show' : '' }}">
                 <li class="sidebar-item">
-                    <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
+                    <a class="sidebar-link {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
                         href="/main/poliumum/antrian">
                         <i class="ti ti-circle"></i>
                         <span class="hide-menu">Antrian</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link ps-5 {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
+                    <a class="sidebar-link {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
                         href="/main/poliumum/riwayat">
                         <i class="ti ti-circle"></i>
                         <span class="hide-menu">Riwayat</span>
@@ -126,34 +129,26 @@
             </ul>
         </li>
 
-        {{-- Poli KIA --}}
+        {{-- POLI KIA --}}
         <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('main/layanan*') ? 'active' : '' }}"
-                href="/main/layanan">
-                <div class="round-16 d-flex align-items-center justify-content-center">
-                    <i class="ti ti-circle"></i>
-                </div>
+            <a class="sidebar-link {{ $isPolikia ? 'active' : '' }}" href="/main/layanan">
+                <i class="ti ti-circle"></i>
                 <span class="hide-menu">Poli KIA</span>
             </a>
         </li>
 
-        {{-- Rawat Inap --}}
+        {{-- RAWAT INAP --}}
         <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('main/rawat-inap*') ? 'active' : '' }}"
-                href="/main/rawat-inap">
-                <div class="round-16 d-flex align-items-center justify-content-center">
-                    <i class="ti ti-circle"></i>
-                </div>
+            <a class="sidebar-link {{ $isRawatInap ? 'active' : '' }}" href="/main/rawat-inap">
+                <i class="ti ti-circle"></i>
                 <span class="hide-menu">Rawat Inap</span>
             </a>
         </li>
 
         {{-- UGD --}}
         <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('/') ? 'active' : '' }}" href="/">
-                <div class="round-16 d-flex align-items-center justify-content-center">
-                    <i class="ti ti-circle"></i>
-                </div>
+            <a class="sidebar-link {{ $isUGD ? 'active' : '' }}" href="/">
+                <i class="ti ti-circle"></i>
                 <span class="hide-menu">UGD</span>
             </a>
         </li>
