@@ -103,7 +103,7 @@
         </span>
     </a>
 
-    <ul id="menu-pemeriksaan" class="first-level collapse {{ $isPemeriksaanOpen ? 'show' : '' }}">
+    <ul id="menu-pemeriksaan" class="sidebar-menu collapse first-level {{ $isPemeriksaanOpen ? 'show' : '' }}">
         {{-- POLI UMUM --}}
         <li class="sidebar-item">
             <a class="sidebar-link has-arrow {{ $isPoliumum ? 'active' : '' }}"
@@ -116,7 +116,7 @@
                     <span class="hide-menu ms-2">Poli Umum</span>
                 </div>
             </a>
-            <ul id="submenu-poliumum" class="second-level collapse {{ $isPoliumum ? 'show' : '' }}">
+            <ul id="submenu-poliumum" class="sidebar-submenu collapse second-level {{ $isPoliumum ? 'show' : '' }}">
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
                         href="/main/poliumum/antrian">
