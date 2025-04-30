@@ -84,18 +84,22 @@
 @endphp
 
 <li class="sidebar-item">
-    <a class="sidebar-link has-arrow {{ $isPemeriksaanOpen ? 'active' : '' }}"
-        href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#menu-pemeriksaan"
-        aria-expanded="{{ $isPemeriksaanOpen ? 'true' : 'false' }}">
+    <a class="sidebar-link has-arrow {{ $isPemeriksaanOpen ? 'active' : '' }}" 
+       href="javascript:void(0)" 
+       data-bs-toggle="collapse" 
+       data-bs-target="#menu-pemeriksaan"
+       aria-expanded="{{ $isPemeriksaanOpen ? 'true' : 'false' }}">
         <span class="d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                fill="currentColor" class="bi bi-heart-pulse me-2" viewBox="0 0 16 16">
-                <path
-                    d="M1 6.5C1 3.462 3.462 1 6.5 1S12 3.462 12 6.5a5.5 5.5 0 0 1-11 0ZM6.5 0a6.5 6.5 0 0 0 0 13 6.5 6.5 0 0 0 0-13Z" />
-                <path
-                    d="M10.354 5.646a.5.5 0 0 0-.708.708L11.293 8H9.5a.5.5 0 0 0 0 1h1.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5Z" />
-            </svg>
-            <span class="hide-menu">Pemeriksaan</span>
+            <span class="d-flex">
+                <svg class="bi bi-heart-pulse" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5" />
+                    <path
+                        d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z" />
+                </svg>
+            </span>
+            <span class="hide-menu ms-2">Pemeriksaan</span>
         </span>
     </a>
 
@@ -103,27 +107,32 @@
         {{-- POLI UMUM --}}
         <li class="sidebar-item">
             <a class="sidebar-link has-arrow {{ $isPoliumum ? 'active' : '' }}"
-                href="javascript:void(0)" data-bs-toggle="collapse"
-                data-bs-target="#submenu-poliumum" aria-expanded="{{ $isPoliumum ? 'true' : 'false' }}">
+                href="javascript:void(0)" 
+                data-bs-toggle="collapse"
+                data-bs-target="#submenu-poliumum" 
+                aria-expanded="{{ $isPoliumum ? 'true' : 'false' }}">
                 <div class="d-flex align-items-center">
                     <i class="ti ti-circle"></i>
                     <span class="hide-menu ms-2">Poli Umum</span>
                 </div>
             </a>
-
             <ul id="submenu-poliumum" class="second-level collapse {{ $isPoliumum ? 'show' : '' }}">
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('main/poliumum/antrian') ? 'active' : '' }}"
                         href="/main/poliumum/antrian">
-                        <i class="ti ti-circle"></i>
-                        <span class="hide-menu">Antrian</span>
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-circle" style="margin-left: 15px;"></i>
+                            <span class="hide-menu ms-2">Antrian</span>
+                        </div>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->is('main/poliumum/riwayat') ? 'active' : '' }}"
                         href="/main/poliumum/riwayat">
-                        <i class="ti ti-circle"></i>
-                        <span class="hide-menu">Riwayat</span>
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-circle" style="margin-left: 15px;"></i>
+                            <span class="hide-menu ms-2">Riwayat</span>
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -132,24 +141,30 @@
         {{-- POLI KIA --}}
         <li class="sidebar-item">
             <a class="sidebar-link {{ $isPolikia ? 'active' : '' }}" href="/main/layanan">
-                <i class="ti ti-circle"></i>
-                <span class="hide-menu">Poli KIA</span>
+                <div class="d-flex align-items-center">
+                    <i class="ti ti-circle"></i>
+                    <span class="hide-menu ms-2">Poli KIA</span>
+                </div>
             </a>
         </li>
 
         {{-- RAWAT INAP --}}
         <li class="sidebar-item">
             <a class="sidebar-link {{ $isRawatInap ? 'active' : '' }}" href="/main/rawat-inap">
-                <i class="ti ti-circle"></i>
-                <span class="hide-menu">Rawat Inap</span>
+                <div class="d-flex align-items-center">
+                    <i class="ti ti-circle"></i>
+                    <span class="hide-menu ms-2">Rawat Inap</span>
+                </div>
             </a>
         </li>
 
         {{-- UGD --}}
         <li class="sidebar-item">
             <a class="sidebar-link {{ $isUGD ? 'active' : '' }}" href="/">
-                <i class="ti ti-circle"></i>
-                <span class="hide-menu">UGD</span>
+                <div class="d-flex align-items-center">
+                    <i class="ti ti-circle"></i>
+                    <span class="hide-menu ms-2">UGD</span>
+                </div>
             </a>
         </li>
     </ul>
