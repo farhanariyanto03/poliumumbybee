@@ -4,7 +4,9 @@
 
 @section('pageContent')
 
+@extends('layouts.app')
 
+@section('content')
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap');
 
