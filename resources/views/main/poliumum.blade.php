@@ -20,7 +20,9 @@
                 </style>
                 <form action="#" class="validation-wizard wizard-circle mt-5">
                     <!-- Step 1 -->
-                    <h6>Pendaftaran</h6>
+                    <h6>
+                        <span class="step"><i class="ti ti-clipboard-text"></i></span>Pendaftaran
+                    </h6>
                     <section>
                         <h5 class="section-title">Data Identitas Pasien</h5>
                         <style>
@@ -331,7 +333,9 @@
                     </section>
 
                     <!-- Step 2 -->
-                    <h6>Pemeriksaan Awal</h6>
+                    <h6>
+                        <span class="step"><i class="ti ti-nurse"></i></span>Pemeriksaan Awal
+                    </h6>
                     <section>
                         <h4 class="section-title">Data Pendaftaran</h4>
                         <div class="row mb-3">
@@ -471,7 +475,9 @@
                     </section>
 
                     <!-- Step 3 -->
-                    <h6>Pemeriksaan</h6>
+                    <h6>
+                        <span class="step"><i class="ti ti-stethoscope"></i></span>Pemeriksaan
+                    </h6>
                     <section>
                         <h4 class="section-title">Data Pemeriksaan</h4>
                         <div class="row mb-3">
@@ -733,7 +739,7 @@
                             </div>
                     </section>
                     <!-- Step 4 -->
-                    <h6>Farmasi</h6>
+                    <h6><span class="step"><i class="ti ti-pill"></i></span>Farmasi</h6>
                     <section>
                         <div class="row">
                             <div class="col-md-6">
@@ -795,7 +801,7 @@
                     </section>
 
                     <!-- Step 5 -->
-                    <h6>Pembayaran</h6>
+                    <h6><span class="step"><i class="ti ti-receipt-2"></i></span>Pembayaran</h6>
                     <section>
                         <div class="row">
                             <div class="col-md-6">
