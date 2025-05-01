@@ -7,42 +7,28 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SuratKeteranganSakitController;
 
 
-// Route::get('/', function () {
-//     return view('main.index');
-// });
+Route::get('/', function () {
+    return view('main.index');
+});
 
-// Route::get('/{main}/{view}', [PageController::class, 'show']);
-
-// Dashboard
-Route::get('/', function () { return view('dashboard'); })->name('dashboard');
-
-// Pendaftaran
-Route::get('/pendaftaran', [PasienController::class, 'create'])->name('pendaftaran.create');
-Route::post('/pendaftaran', [PasienController::class, 'store'])->name('pendaftaran.store');
-
-// Surat
-Route::get('/surat/sehat', function () { return view('surat.sehat'); })->name('surat.sehat');
-Route::get('/surat/sakit', function () { return view('surat.sakit'); })->name('surat.sakit');
-
-// Poli Umum
-Route::get('/poliumum/antrian', function () { return view('poli.umum.antrian'); });
-Route::get('/poliumum/tindakan', function () { return view('poli.umum.tindakan'); });
-
-// Farmasi
-Route::get('/farmasi/dataobat', function () { return view('farmasi.dataobat'); });
-Route::get('/farmasi/resep', function () { return view('farmasi.resep'); });
-Route::get('/farmasi/pengambilan', function () { return view('farmasi.pengambilan'); });
-
-// Master Data
-Route::get('/masterdata/pasien', function () { return view('masterdata.pasien'); });
-
-// Doctor
-Route::get('/doctor', function () { return view('dokter.index'); })->name('doctor.index');
+Route::get('/{main}/{view}', [PageController::class, 'show']);
 
 
-// // route dokter
-// Route::resource('doctors', DoctorController::class);
+// Pendaftaran dan Proses Pemeriksaan Step-by-Step
+Route::controller(PasienController::class)->group(function () {
+    Route::get('/pendaftaran', 'create')->name('pendaftaran.create');
+    Route::post('/pendaftaran', 'store')->name('pendaftaran.store');
 
-// // route suratSakit
+    Route::get('/pendaftaran/{id}/pemeriksaan', 'showPemeriksaan')->name('pasien.pemeriksaan');
+    Route::get('/pendaftaran/{id}/diagnosa', 'showDiagnosis')->name('pasien.diagnosa');
+    Route::get('/pendaftaran/{id}/farmasi', 'showFarmasi')->name('pasien.farmasi');
+    Route::get('/pendaftaran/{id}/pembayaran', 'showPembayaran')->name('pasien.pembayaran');
+});
 
-// Route::get('/surat-keterangan-sakit', [SuratKeteranganSakitController::class, 'index'])->name('surat.sakit');
+
+// route dokter
+Route::resource('doctors', DoctorController::class);
+
+// route suratSakit
+
+Route::get('/surat-keterangan-sakit', [SuratKeteranganSakitController::class, 'index'])->name('surat.sakit');
