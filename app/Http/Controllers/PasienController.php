@@ -3,57 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use App\Http\Requests\StorePasienRequest;
+use App\Http\Requests\UpdatePasienRequest;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
 {
-    public function index()
-    {
-        $pasiens = Pasien::paginate(10);
-        return view('pasiens.index', compact('pasiens'));
-    }
+    private $stepTitles = [
+        0 => 'Pendaftaran',
+        1 => 'Pemeriksaan Awal',
+        2 => 'Diagnosis & Tindakan Poli Umum',
+        3 => 'Farmasi',
+        4 => 'Pembayaran'
+    ];
 
     public function create()
     {
         return view('pasiens.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePasienRequest $request)
     {
-        $request->validate([
-            'norm' => 'required|string|max:20|unique:pasiens',
-            'nama' => 'required|string|max:100',
-            'nik' => 'required|digits:16|unique:pasiens',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:tidak_diketahui,laki_laki,perempuan,tidak_dapat_ditentukan,tidak_mengisi',
-            'agama' => 'required|string',
-            'status_perkawinan' => 'required|in:belum_kawin,kawin,cerai_hidup,cerai_mati',
-            'pendidikan' => 'required|string',
-            'pekerjaan' => 'required|string',
-            'kewarganegaraan' => 'required|in:wni,wna',
-            'no_telepon' => 'required|numeric|min:10',
-            'alamat_lengkap' => 'required|string',
-            'rt' => 'required|numeric|max_digits:3',
-            'rw' => 'required|numeric|max_digits:3',
-            'kelurahan' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kota' => 'required|string',
-            'provinsi' => 'required|string',
-            'kode_pos' => 'required|digits:5',
-            'hubungan_wali' => 'required|string',
-            'nama_wali' => 'nullable|string',
-            'tanggal_lahir_wali' => 'nullable|date',
-            'telepon_wali' => 'nullable|numeric|min:10|max_digits:13',
-            'alamat_wali' => 'nullable|string',
-            'layanan' => 'required|in:poliumum,poligigi,kia,circum,vaksin',
-            'dokter' => 'required|string',
-            'cara_pembayaran' => 'required|in:umum,bpjs',
-        ]);
+        $pasien = Pasien::create($request->all());
 
-        Pasien::create($request->all());
-
-        return redirect()->route('pasien.pemeriksaan.create', ['id' => $pasien->id])
+        return redirect()->route('pasien.pemeriksaan', ['id' => $pasien->id])
                          ->with('success', 'Data pasien berhasil disimpan.');
     }
 
@@ -67,22 +40,41 @@ class PasienController extends Controller
         return view('pasiens.edit', compact('pasien'));
     }
 
-    public function update(Request $request, Pasien $pasien)
+    public function update(UpdatePasienRequest $request, Pasien $pasien)
     {
-        $request->validate([
-            'norm' => 'required|string|max:20|unique:pasiens,id,' . $pasien->id,
-            'nik' => 'required|digits:16|unique:pasiens,id,' . $pasien->id,
-        ]);
+        $pasien->update($request->validated());
 
-        $pasien->update($request->all());
-
-        return back()->with('success', 'Data pasien berhasil diperbarui.');
+        return back()->with('success', 'Data pasien diperbarui.');
     }
 
     public function destroy(Pasien $pasien)
     {
         $pasien->delete();
 
-        return back()->with('success', 'Data pasien berhasil dihapus.');
+        return back()->with('success', 'Data pasien dihapus.');
+    }
+
+    public function showPemeriksaan($id)
+    {
+        $pasien = Pasien::findOrFail($id);
+        return view('pasiens.step2', compact('pasien'));
+    }
+
+    public function showDiagnosis($id)
+    {
+        $pasien = Pasien::findOrFail($id);
+        return view('pasiens.step3', compact('pasien'));
+    }
+
+    public function showFarmasi($id)
+    {
+        $pasien = Pasien::findOrFail($id);
+        return view('pasiens.step4', compact('pasien'));
+    }
+
+    public function showPembayaran($id)
+    {
+        $pasien = Pasien::findOrFail($id);
+        return view('pasiens.step5', compact('pasien'));
     }
 }
