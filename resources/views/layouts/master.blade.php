@@ -6,6 +6,10 @@
     <title>@yield('title', 'SIP-Kes')</title>
     @yield('css')
 
+    @stack('style')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .title {
@@ -46,8 +50,6 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 40px;
-            max-width: 500px;
-            /* Limit width for compactness */
             margin-left: auto;
             margin-right: auto;
         }
@@ -141,7 +143,9 @@
 
         <!-- Sidebar Start -->
         <aside class="left-sidebar with-vertical">
-            <div>@include('layouts.sidebar')</div>
+            <div>
+                @include('layouts.sidebar', ['hideLogo' => $hideLogo ?? false])
+            </div>
         </aside>
         <!-- Sidebar End -->
 
@@ -160,6 +164,7 @@
             <div class="body-wrapper">
                 <div class="container-fluid">
                     @yield('pageContent')
+                    {{ $slot ?? '' }}
                 </div>
             </div>
             <!-- @include('layouts.customizer') -->
@@ -168,6 +173,12 @@
     <div class="dark-transparent sidebartoggler"></div>
     @include('layouts.scripts')
     @yield('scripts')
+  <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['hideLogo' => true])
 @section('title', 'SIP-Kes | Rawat Inap')
 
 <!--
@@ -10,5 +10,5 @@ livewire + volt + pure bootstrap 5
 -->
 
 @section('pageContent')
-@livewire('rawat-inap.main')
+@livewire('rawat-inap.index')
 @endsection

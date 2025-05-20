@@ -2,26 +2,58 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pasien extends Model
 {
-    use HasFactory;
+    protected $table = 'pasiens';
 
-    protected $table = 'pasiens'; // atau nama tabel sesuai kebutuhan
     protected $fillable = [
-        'norm', 'nama', 'nik', 'tempat_lahir', 'tanggal_lahir',
-        'jenis_kelamin', 'agama', 'status_perkawinan', 'pendidikan',
-        'pekerjaan', 'kewarganegaraan', 'no_telepon',
-        'alamat_lengkap', 'rt', 'rw', 'kelurahan', 'kecamatan',
-        'kota', 'provinsi', 'kode_pos', 'hubungan_wali',
-        'nama_wali', 'tanggal_lahir_wali', 'telepon_wali', 'alamat_wali',
-        'layanan', 'dokter', 'cara_pembayaran'
+        'nama',
+        'usia',
+        'no_jamkes',
+        'nama_penanggung_jawab',
+        'created_at',
+        'updated_at',
     ];
 
-    protected $casts = [
-        'tanggal_lahir' => 'date',
-        'tanggal_lahir_wali' => 'date',
-    ];
+    public function kondisi()
+    {
+        return $this->hasOne(KondisiPasien::class, 'pasien_id', 'id');
+    }
+
+    public function detail()
+    {
+        return $this->hasOne(DetailKondisi::class, 'pasien_id', 'id');
+    }
+
+    public function layanan()
+    {
+        return $this->hasMany(LayananUGD::class, 'pasien_id', 'id');
+    }
+
+    public function pengkajianRisiko()
+    {
+        return $this->hasOne(PengkajianRisikoDewasa::class, 'pasien_id', 'id');
+    }
+
+    public function adl()
+    {
+        return $this->hasOne(AdlUgd::class, 'pasien_id', 'id');
+    }
+
+    public function icd()
+    {
+        return $this->hasMany(IcdUgd::class, 'pasien_id', 'id');
+    }
+
+    public function obat()
+    {
+        return $this->hasMany(ObatUGD::class, 'pasien_id', 'id');
+    }
+
+    public function rencanaKontrol()
+    {
+        return $this->hasMany(RencanaKontrolUGD::class, 'pasien_id', 'id');
+    }
 }
