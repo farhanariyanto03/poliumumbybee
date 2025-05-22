@@ -18,14 +18,11 @@ class Pendaftaran extends Model
     protected $appends = ['layanan_terisi'];
 
     protected $fillable = [
-        'id_pendaftaran',
         'id_poli',
         'no_rm',
-        'id_jenis_pembayaran',
         'id_dokter',
-        'id_wali',
-        'created_at',
-        'updated_at',
+        'id_wali_pasien',
+        'jenis_pembayaran',
     ];
 
     public function data_pasien()

@@ -57,7 +57,7 @@
                         margin-bottom: 20px;
                     }
                 </style>
-                <form action="#" method="POST" class="validation-wizard wizard-circle mt-5">
+                <form action="{{ route('pendaftaran.store') }}" method="POST" class="validation-wizard wizard-circle mt-5">
                     @csrf
                     <!-- Step 1 -->
                     <h6>Pendaftaran</h6>
@@ -74,6 +74,29 @@
                             }
                         </style>
                         <div class="card w-100">
+                            @if (session('success'))
+                                <div class="alert alert-success d-flex align-items-center" role="alert">
+                                    <i class="ti ti-circle-check fs-5"></i>
+                                    <div class="ms-3">
+                                        {{ session('success') }}
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger d-flex align-items-start" role="alert">
+                                    <i class="ti ti-alert-circle fs-5 me-2"></i>
+                                    <div>
+                                        <strong>Terjadi kesalahan!</strong>
+                                        <ul class="mb-0 mt-1">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="row">
                                 {{-- <div class="row mb-3"> --}}
                                 <div class="col-md-10">
@@ -81,12 +104,12 @@
                                     <input class="form-control" list="noRMList" id="searchNoRM"
                                         placeholder="Ketik atau pilih No. RM">
                                     <datalist id="noRMList">
-                                        @foreach ($data_pasien as $pasien)
+                                        {{-- @foreach ($data_pasien as $pasien)
                                             <option value="{{ $pasien->no_rm }} - {{ $pasien->nama_lengkap }}">
                                                 {{ $pasien->no_rm }} - {{ $pasien->nama_lengkap }}
                                             </option>
                                             <!-- Bisa diisi via JavaScript juga -->
-                                        @endforeach
+                                        @endforeach --}}
                                     </datalist>
                                     <script>
                                         $(document).ready(function() {
@@ -193,32 +216,32 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label class="form-label" for="provinsi">Provinsi:</label>
-                                        <input type="text" class="form-control required" id="provinsi"
-                                            name="provinsi" />
+                                        <label class="form-label" for="id_provinsi">Provinsi:</label>
+                                        <input type="text" class="form-control required" id="id_provinsi"
+                                            name="id_provinsi" />
                                         {{-- <select class="form-select required" id="provinsi" name="code_provinsi">
                                             <option value=""><-- Pilih Provinsi ---></option>
                                             @foreach ($data_provinsi as $provinsi)
-                                                <option value="{{ $provinsi->code_provinsi }}">
-                                    {{ $provinsi->name_provinsi }}
-                                    </option>
-                                    @endforeach
-                                    </select> --}}
+                                                <option value="{{ $provinsi->code }}">
+                                                    {{ $provinsi->name }}
+                                                </option>
+                                            @endforeach
+                                        </select> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="kota">Kota/Kabupaten:</label>
-                                        <input type="text" class="form-control required" id="kabupaten"
-                                            name="kabupaten" />
+                                        <input type="text" class="form-control required" id="id_kota"
+                                            name="id_kota" />
                                         {{-- <select class="form-select required" id="kabupaten" name="code_kabupaten">
                                             <option value=""><-- Pilih Kota ---></option>
                                             @foreach ($data_kabupaten as $kabupaten)
-                                                <option value="{{ $kabupaten->code_kabupaten }}">
-                                    {{ $kabupaten->name_kabupaten }}
-                                    </option>
-                                    @endforeach
-                                    </select> --}}
+                                                <option value="{{ $kabupaten->code }}">
+                                                    {{ $kabupaten->name }}
+                                                </option>
+                                            @endforeach
+                                        </select> --}}
                                     </div>
                                 </div>
                             </div>
@@ -233,17 +256,18 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="kecamatan">Kecamatan:</label>
-                                        <input type="text" class="form-control required" id="kecamatan"
-                                            name="kecamatan" />
-                                        {{-- <select class="form-select required" id="kecamatan" name="code_kecamatan">
-                                            <option value=""><-- Pilih Kecamatan ---></option>
+                                        <input type="text" class="form-control required" id="id_kecamatan"
+                                            name="id_kecamatan" />
+                                        {{-- <select id="kecamatan" name="code_kecamatan" class="form-control">
+                                            <option value="">-- Pilih Kecamatan --</option>
                                         </select> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="kelurahan">Kelurahan/Desa: </label>
-                                        <input type="text" class="form-control required" id="desa" name="desa" />
+                                        <input type="text" class="form-control required" id="id_desa"
+                                            name="id_desa" />
                                         {{-- <select class="form-select required" id="desa" name="code_desa">
                                             <option value=""><-- Pilih Desa ---></option>
                                         </select> --}}
@@ -474,9 +498,9 @@
                                                     <-- Pilih Dokter --->
                                                 </option>
                                                 @foreach ($data_dokter as $dokter)
-                                                <option value="{{ $dokter->id }}">
-                                                    {{ $dokter->nama }}
-                                                </option>
+                                                    <option value="{{ $dokter->id }}">
+                                                        {{ $dokter->nama }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -3117,6 +3141,55 @@
         <script src="{{ URL::asset('build/js/forms/form-wizard.js') }}"></script>
         <script src="{{ URL::asset('build/libs/inputmask/dist/jquery.inputmask.min.js') }}"></script>
         <script src="{{ URL::asset('build/js/forms/mask.init.js') }}"></script>
+
+        {{-- Wilayah indonesia --}}
+        <script>
+            // Provinsi -> Kabupaten
+            $('#provinsi').on('change', function() {
+                let code_provinsi = $(this).val();
+                $('#kabupaten').html('<option value="">-- Pilih Kabupaten --</option>');
+                $('#kecamatan').html('<option value="">-- Pilih Kecamatan --</option>');
+                $('#desa').html('<option value="">-- Pilih Desa --</option>');
+                if (code_provinsi) {
+                    $.get('/get-kabupaten/' + code_provinsi, function(data) {
+                        $.each(data, function(i, kab) {
+                            $('#kabupaten').append('<option value="' + kab.code_kabupaten + '">' + kab
+                                .name + '</option>');
+                        });
+                    });
+                }
+            });
+
+            // Kabupaten -> Kecamatan
+            $('#kabupaten').on('change', function() {
+                let code_kabupaten = $(this).val();
+                $('#kecamatan').html('<option value="">-- Pilih Kecamatan --</option>');
+                $('#desa').html('<option value="">-- Pilih Desa --</option>');
+                if (code_kabupaten) {
+                    $.get('/get-kecamatan/' + code_kabupaten, function(data) {
+                        $.each(data, function(i, kec) {
+                            $('#kecamatan').append(
+                                '<option value="' + kec.code + '">' + kec.name + '</option>'
+                            );
+                        });
+                    });
+                }
+            });
+
+            // Kecamatan -> Desa
+            $('#kecamatan').on('change', function() {
+                let code_kecamatan = $(this).val();
+                $('#desa').html('<option value="">-- Pilih Desa --</option>');
+                if (code_kecamatan) {
+                    $.get('/get-desa/' + code_kecamatan, function(data) {
+                        $.each(data, function(i, d) {
+                            $('#desa').append('<option value="' + d.code_desa + '">' + d.nama_desa +
+                                '</option>');
+                        });
+                    });
+                }
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {

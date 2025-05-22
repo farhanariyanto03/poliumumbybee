@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\PoliUmum;
-use App\Models\DataPasien;
-use App\Models\dokter;
-use App\Models\pokter;
 
+use App\Models\Poli;
+use App\Models\dokter;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\DataPasien;
+use App\Models\WaliPasien;
+use App\Models\Pendaftaran;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class PendafataranController extends Controller
@@ -14,7 +21,9 @@ class PendafataranController extends Controller
         return view('main.pendaftaran', [
             'data_pasien' => DataPasien::all(),
             'data_dokter' => dokter::all(),
-            'data_poli' => poli::all()
+            'data_poli' => Poli::all(),
+            'data_provinsi' => Provinsi::all(),
+            // 'data_kabupaten' => Kabupaten::all()
         ]);
     }
 
@@ -38,10 +47,10 @@ class PendafataranController extends Controller
                 'kewarganegaraan' => 'required|numeric',
                 'gol_darah' => 'required|numeric',
                 'nama_ibu_kandung' => 'required|string',
-                'provinsi' => 'nullable|numeric',
-                'kabupaten' => 'nullable|numeric',
-                'kecamatan' => 'required|numeric',
-                'desa' => 'nullable|numeric',
+                'id_provinsi' => 'nullable|numeric',
+                'id_kota' => 'nullable|numeric',
+                'id_kecamatan' => 'required|numeric',
+                'id_desa' => 'nullable|numeric',
                 'kode_pos' => 'nullable|numeric',
 
                 // Data Wali
@@ -57,27 +66,33 @@ class PendafataranController extends Controller
                 'jenis_pembayaran' => 'required|numeric',
             ]);
 
-            // Cek pasien berdasarkan nik atau no_rm
+            // Cek pasien berdasarkan NIK
             $existingPatient = null;
             if (!empty($validatedData['nik_pasien'])) {
                 $existingPatient = DataPasien::where('nik_pasien', $validatedData['nik_pasien'])->first();
-            } elseif (!empty($validatedData['no_rm'])) {
-                $existingPatient = DataPasien::where('no_rm', $validatedData['no_rm'])->first();
             }
 
             // Jika pasien belum ada, buat pasien baru
             if (!$existingPatient) {
+                // Ambil pasien terakhir berdasarkan no_rm
                 $lastPatient = DataPasien::orderByDesc('no_rm')->first();
-                $lastNumber = $lastPatient ? (int) substr($lastPatient->no_rm, 2) : 0;
+
+                // Ambil angka dari no_rm terakhir (hanya bagian angka setelah 'RM')
+                $lastNumber = 0;
+
+                if ($lastPatient && preg_match('/^RM(\d{6})$/', $lastPatient->no_rm, $matches)) {
+                    $lastNumber = (int) $matches[1];
+                }
                 $newNumber = $lastNumber + 1;
                 $no_rm = 'RM' . str_pad($newNumber, 6, '0', STR_PAD_LEFT);
-
-                $existingPatient = DataPasien::create(array_merge(
-                    $validatedData,
-                    ['no_rm' => $no_rm]
-                ));
+                $existingPatient = DataPasien::create(array_merge($validatedData, [
+                    'no_rm' => $no_rm
+                ]));
             } else {
-                // Update pasien yang sudah ada berdasarkan no_rm
+                // Gunakan no_rm dari data pasien lama
+                $no_rm = $existingPatient->no_rm;
+
+                // Update pasien
                 $existingPatient->update([
                     'nama_pasien' => $validatedData['nama_pasien'],
                     'tempat_lahir_pasien' => $validatedData['tempat_lahir_pasien'],
@@ -94,24 +109,21 @@ class PendafataranController extends Controller
                     'kewarganegaraan' => $validatedData['kewarganegaraan'],
                     'gol_darah' => $validatedData['gol_darah'],
                     'nama_ibu_kandung' => $validatedData['nama_ibu_kandung'],
-                    'provinsi' => $validatedData['provinsi'],
-                    'kabupaten' => $validatedData['kabupaten'],
-                    'kecamatan' => $validatedData['kecamatan'],
-                    'desa' => $validatedData['desa'],
+                    'id_provinsi' => $validatedData['id_provinsi'],
+                    'id_kota' => $validatedData['id_kota'],
+                    'id_kecamatan' => $validatedData['id_kecamatan'],
+                    'id_desa' => $validatedData['id_desa'],
                     'kode_pos' => $validatedData['kode_pos'],
                 ]);
             }
 
-            $no_rm = $existingPatient->no_rm;
-
-            // Cek wali berdasarkan nama dan no telepon
-            $existingWali = DataWali::where('nama_wali', $validatedData['nama_wali'])
+            // Cek wali pasien
+            $existingWali = WaliPasien::where('nama_wali', $validatedData['nama_wali'])
                 ->where('no_telepon_wali', $validatedData['no_telepon_wali'] ?? null)
                 ->first();
 
-            // Jika wali belum ada, buat wali baru
             if (!$existingWali) {
-                $existingWali = DataWali::create([
+                $existingWali = WaliPasien::create([
                     'no_rm' => $no_rm,
                     'nama_wali' => $validatedData['nama_wali'],
                     'tanggal_lahir_wali' => $validatedData['tanggal_lahir_wali'],
@@ -124,9 +136,9 @@ class PendafataranController extends Controller
             // Simpan data pendaftaran
             Pendaftaran::create([
                 'no_rm' => $no_rm,
-                'id_poli' => $validatedData['id_poli'],
-                'id_data_dokter' => $validatedData['id_data_dokter'],
-                'id_data_wali_pasien' => $existingWali->id_data_wali_pasien,
+                'id_poli' => 1,
+                'id_dokter' => $validatedData['id_data_dokter'],
+                'id_wali_pasien' => $existingWali->id,
                 'jenis_pembayaran' => $validatedData['jenis_pembayaran'],
             ]);
 
@@ -136,6 +148,25 @@ class PendafataranController extends Controller
             return redirect()->back()->withErrors(['msg' => 'Gagal menambahkan data: ' . $e->getMessage()]);
         }
     }
+
+    // public function getKabupaten($province_code)
+    // {
+    //     $kabupaten = Kabupaten::where('province_code', $province_code)->get();
+
+    //     return response()->json($kabupaten);
+    // }
+
+    // public function getKecamatan($city_code)
+    // {
+    //     $kecamatan = Kecamatan::where('city_code', $city_code)->get(['code', 'name']);
+    //     return response()->json($kecamatan);
+    // }
+
+    // public function getDesa($code_kecamatan)
+    // {
+    //     $desa = Desa::where('code_kecamatan', $code_kecamatan)->get();
+    //     return response()->json($desa);
+    // }
 
     public function getDataPasien($no_rm)
     {
@@ -152,5 +183,4 @@ class PendafataranController extends Controller
         Log::info('Pasien ditemukan:', ['pasien' => $pasien]);
         return response()->json($pasien);
     }
-
 }

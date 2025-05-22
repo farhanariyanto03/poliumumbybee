@@ -7,6 +7,8 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\TriageController;
+use App\Http\Controllers\PoliUmum\AntrianRiwayatController;
+use App\Http\Controllers\PoliUmum\PendafataranController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -42,18 +44,21 @@ Route::get('/get-pasien', [TriageController::class, 'getPasien'])->name('get-pas
 Route::get('/get-list-obat', [TriageController::class, 'getObat'])->name('get-list-obat');
 Route::get('/print-pdf/{id}', [TriageController::class, 'printPdf'])->name('print-pdf');
 
+Route::get('/main/pendaftaran', [PendafataranController::class, 'index'])->name('pendaftaran.index');
+Route::post('/main/pendaftaran/pasien', [PendafataranController::class, 'storePendafataran'])->name('pendaftaran.store');
+Route::get('/get-data-pasien/{no_rm}', [PendafataranController::class, 'getDataPasien']);
+// Route::get('/get-kabupaten/{province_code}', [PendafataranController::class, 'getKabupaten']);
+// Route::get('/get-kecamatan/{city_code}', [PendafataranController::class, 'getKecamatan']);
+// Route::get('/get-desa/{code_kecamatan}', [PendaftaranController::class, 'getDesa']);
+
 Route::get('/{main}/{view}', [PageController::class, 'show']);
 Route::get('/main/to/{path}', [PageController::class, 'showByPath'])->where('path', '.*');
 
-// route sidebar antrian dan riwayat
-use App\Http\Controllers\PoliUmum\AntrianRiwayatController;
-
 Route::prefix('main/poliumum')->group(function () {
-    Route::post('/main/pendaftaran/pasien', [PendaftaranController::class, 'storePendafataran'])->name('pendaftaran.store');
-    Route::get('/get-data-pasien/{no_rm}', [PendaftaranController::class, 'getDataPasien']);
     Route::get('/antrean', [AntrianRiwayatController::class, 'antrean'])->name('antrean.poliumum');
     Route::get('/riwayat', [AntrianRiwayatController::class, 'riwayat'])->name('riwayat.poliumum');
 });
+
 
 // Route detail riwayat pasien
 Route::get('/poli-umum/detail/{rm}', function ($rm) {

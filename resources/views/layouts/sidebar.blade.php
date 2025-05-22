@@ -64,7 +64,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link {{ request()->is('main/pendaftaran') ? 'active' : '' }}" href="/main/pendaftaran"
+            <a class="sidebar-link {{ request()->is('main/pendaftaran') ? 'active' : '' }}" href="{{ route('pendaftaran.index') }}"
                 aria-expanded="false">
                 <span class="d-flex">
                     <svg class="bi bi-clipboard" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -388,7 +388,7 @@
             </ul>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link has-arrow 
+            <a class="sidebar-link has-arrow
         {{ request()->is('dokter') || request()->is('layanan') || request()->is('poli') ? 'active' : '' }}"
                 href="javascript:void(0)" aria-expanded="false">
                 <span class="d-flex">
