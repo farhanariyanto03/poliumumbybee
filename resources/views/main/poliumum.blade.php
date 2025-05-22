@@ -353,8 +353,9 @@
                                                 class="danger">*</span></label>
                                         <select class="form-select required" id="layanan" name="layanan">
                                             <option value="poliumum">Poli Umum</option>
+                                            <option value="poligigi">Poli Gigi</option>
+                                            <option value="kia">KIA</option>
                                             <option value="circum">Circum</option>
-<<<<<<< HEAD
                                             <option value="vaksin">Vaksin Internasional</option>
                                         </select>
                                     </div>
@@ -377,8 +378,6 @@
                                         <select class="form-select required" id="bayar" name="bayar">
                                             <option value="umum">Umum</option>
                                             <option value="bpjs">BPJS</option>
-=======
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
                                         </select>
                                     </div>
                                 </div>
@@ -3311,54 +3310,4 @@ $('#search-results').hide();
         });
     </script>
 
-<<<<<<< HEAD
-=======
-        .search-item:hover {
-            background-color: #f8f9fa;
-        }
-
-        .selected-icd-item {
-            background-color: #e9f7fe;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-
-        #search-results {
-            border: 1px solid #ced4da;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .hover-bg:hover {
-            background-color: #f0f0f0;
-            cursor: pointer;
-        }
-
-        .z-index-dropdown {
-            z-index: 1000;
-        }
-
-        .min-height-80 {
-            min-height: 80px;
-        }
-    </style>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#next"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Selanjutnya";
-        }
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#previous"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Sebelumnya";
-        }
-        });
-    </script>
-
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
 @endsection

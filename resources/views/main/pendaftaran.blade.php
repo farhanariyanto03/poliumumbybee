@@ -524,7 +524,6 @@
                     <h6>Pemeriksaan Awal</h6>
                     <section>
                         <h4 class="section-title">Data Pendaftaran</h4>
-<<<<<<< HEAD
                     </section>
 
 
@@ -564,14 +563,6 @@
                                 <div class="col-md-2">
                                     <label class="form-label" for="noantian">No Antrian</label>
                                     <input type="text" class="form-control" id="noantian" name="noantian">
-=======
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="noantrian">No. Antrian</label>
-                                    <input type="text" class="form-control required" id="noantrian"
-                                        name="noantrian" />
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="nama">Nama</label>
@@ -1168,11 +1159,7 @@
                                 </div>
                             </div>
                             <div class="row">
-<<<<<<< HEAD
                                 <div class="col-md-4">
-=======
-                                <div class="col-md-3">
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
                                     <div class="mb-3">
                                         <label class="form-label" for="layanan">Layanan <span
                                                 class="danger">*</span></label>
@@ -1186,9 +1173,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="mb-3">
-<<<<<<< HEAD
                                         <label class="form-label" for="dokter">Dokter <span
                                                 class="danger">*</span></label>
                                         <select class="form-select required" id="dokter" name="dokter">
@@ -1199,29 +1185,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-=======
-                                        <label class="form-label" for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="no.rm">No. RM</label>
-                                        <input type="text" class="form-control" id="no.rm" name="no.rm" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="tanggal">Tanggal</label>
-                                        <input type="date" class="form-control required" id="tanggal"
-                                            name="tanggal" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- Kolom Diagnosis -->
-                                <div class="col-md-6">
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
                                     <div class="mb-3">
                                         <label class="form-label" for="bayar">Cara Pembayaran <span
                                                 class="danger">*</span></label>
@@ -3898,7 +3861,6 @@ $('#search-results').hide();
             });
         </script>
 
-<<<<<<< HEAD
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const nextBtn = document.querySelector('a[href="#next"]');
@@ -3950,19 +3912,3 @@ $('#search-results').hide();
         </script>
 
     @endsection
-=======
-        .min-height-80 {
-            min-height: 80px;
-        }
-    </style>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const nextBtn = document.querySelector('a[href="#next"]');
-        if (nextBtn) {
-            nextBtn.textContent = "Simpan";
-        }
-        });
-    </script>
-@endsection
->>>>>>> af5d8094b36d38e585ef871b17885c5d4dd8ea22
